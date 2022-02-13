@@ -24,13 +24,23 @@ if(mysqli_num_rows($result) > 0) {
   <thead>
       <tr>
          <th>ID</th>
+         <th></th>
+         <th></th>
          <th>Name</th>
-         <th>Date</th>
-         <th>Email</th>
-         <th>Address</th>
-         <th>Status</th>
+         <th></th>
+         <th></th>
+         <th>Employee Status</th>
+         <th></th>
+         <th></th>
+         <th>Hours Worked</th>
+         <th></th>
+         <th></th>
+         <th>Overtime</th>
+         <th></th>
+         <th></th>
          <th>Position</th>
-         <th>PayrollNum</th>
+         <th></th>
+         
          <th>Action</th>
       </tr>
   </thead>
@@ -52,15 +62,24 @@ if(mysqli_num_rows($result) > 0) {
          $output .= '
          <tr>
             <td>'.$row["EMP_ID"].'</td>
+            <td></td>
+            <td></td>
             <td>'.$emp_name.'</td>
-            <td>'.$row["EMP_HIRED"].'</td>
-            <td>'.$row["EMP_EMAIL"].'</td>
-            <td>'.$row["EMP_ADDRESS"].'</td>
+            <td></td>
+            <td></td>
             <td>'.$row["EMP_STATUS"].'</td>
+            <td></td>
+            <td></td>
+            <td> 10 hrs</td> 
+            <td></td>
+            <td></td>
+            <td> 3 hrs</td>
+            <td></td>
+            <td></td>
             <td>'.$row["EMP_POSITION"].'</td>
-            <td>'.$row["EMP_PAYROLLNUM"].'</td>
+            <td></td>
             <td><a href="search_filter.php?id='.$row['EMP_ID'].'" id="btn" onclick="return confirm(\'Are you sure you want to delete this client?\');">
-            <span class="glyphicon glyphicon-trash"></span></a></td>  
+            <span class="glyphicon glyphicon-pencil"></span></a></td>  
          </form>
        </tr>';
       }

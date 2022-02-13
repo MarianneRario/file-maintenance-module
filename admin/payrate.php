@@ -16,37 +16,35 @@
 
     </head>
     <body>
-                    <?php
-                        session_start();
-                        if (! empty($_SESSION['logged_in']))
-                        {
-                            //select data of admin
-                            include '../connection/connect.php';
-                            $query_admin = "SELECT * FROM tb_admin WHERE ADMIN_EMAIL = '$_SESSION[email]'";
-                            $result_admin = mysqli_query($conn, $query_admin);
+    <?php
+        session_start();
+        if (! empty($_SESSION['logged_in']))
+        {
+            //select data of admin
+            include '../connection/connect.php';
+            $query_admin = "SELECT * FROM tb_admin WHERE ADMIN_EMAIL = '$_SESSION[email]'";
+            $result_admin = mysqli_query($conn, $query_admin);
 
-                            if(mysqli_num_rows($result_admin) > 0){
-                                while($row = mysqli_fetch_assoc($result_admin)){
-                                            $fname = $row["ADMIN_FNAME"] ;
-                                            $lname = $row["ADMIN_LNAME"] ;
-                                            $email = $row["ADMIN_EMAIL"] ;
-                                            $id = $row["ADMIN_ID"] ;
-                                }
-                            }
-
-                            
-                            ?>
-                         <?php
-                       }
-                        else
-                        {
-                            // access denied if user is not log in
-                             header("location: ../index.php");
-                             exit; 
-                         }
-                    ?>
-            <?php /* <-- php resumes now */
+            if(mysqli_num_rows($result_admin) > 0){
+                while($row = mysqli_fetch_assoc($result_admin)){
+                            $fname = $row["ADMIN_FNAME"] ;
+                            $lname = $row["ADMIN_LNAME"] ;
+                            $email = $row["ADMIN_EMAIL"] ;
+                            $id = $row["ADMIN_ID"] ;
+                }
+            }
             ?>
+            <?php
+        }
+        else
+        {
+            // access denied if user is not log in
+                header("location: ../index.php");
+                exit; 
+            }
+    ?>
+<?php /* <-- php resumes now */
+?>
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-network-chart'></i>
@@ -54,7 +52,7 @@
     </div>
       <ul class="nav-links">
         <li>
-          <a href="dashboard.php" class="active">
+          <a href="dashboard.php" class="">
             <i class='bx bx-grid-alt' ></i>
             <span class="links_name">Employee</span>
           </a>
@@ -66,7 +64,7 @@
           </a>
         </li>
         <li>
-          <a href="deduction.php">
+          <a href="deduction.php" class="active">
               <i class='bx bx-file'></i>
             <span class="links_name">Deductions</span>
           </a>
@@ -103,11 +101,10 @@
      <nav>
        <div class="sidebar-button">
          <i class='bx bx-menu sidebarBtn'></i>
-         <span class="employee_records">Employee Records</span>
        </div>
-        <button type="button" class="btn btn-success"><i class='bx bx-plus' ></i>Add Employee</button>
+        <button type="button" class="btn btn-success"><i class='bx bx-plus' ></i>Add Record</button>
        <div class="search-box">
-         <input type="text" name="search_text" id="search_text" placeholder="Search Employee">
+         <input type="text" name="search_text" id="search_text" placeholder="Search Record">
          <i class='bx bx-search' ></i>
        </div>
        <div class="profile-details">
@@ -119,13 +116,7 @@
      </nav>
 
      <div class="container search-table">
-             <div class="search-box">
-                 <div class="row">
-                     <div class="col-md-3">
-                         <h5>Search All Fields</h5>
-                     </div>
-                 </div>
-             </div>
+        <!-- display query table -->
        <div id="result"></div>
    </div>
   </section>
@@ -146,7 +137,7 @@
         function load_data(query)
         {
          $.ajax({
-          url:"search_filters.php",
+          url:"payrate_filter.php",
           method:"POST",
           data:{query:query},
           success:function(data)
